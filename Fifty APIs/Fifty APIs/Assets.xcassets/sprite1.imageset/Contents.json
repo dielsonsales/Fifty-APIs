@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "github-octopuss.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
