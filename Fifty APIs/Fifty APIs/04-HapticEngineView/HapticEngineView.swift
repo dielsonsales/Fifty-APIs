@@ -34,5 +34,6 @@ struct HapticEngineView: View {
                 print("Error starting engine: \(error)")
             }
         }
+        .navigationTitle("Haptic Engine")
     }
 }

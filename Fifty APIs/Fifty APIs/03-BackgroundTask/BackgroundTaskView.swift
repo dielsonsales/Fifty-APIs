@@ -20,6 +20,7 @@ struct BackgroundTaskView: View {
                 }
             }
         }
+        .navigationTitle("Background Task")
     }
 }
 
