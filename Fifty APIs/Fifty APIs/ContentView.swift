@@ -16,6 +16,7 @@ enum Screen {
     static let tipKitView = "TipKitView"
     static let barChartsView = "BarChartsView"
     static let backgroundTaskView = "BackgroundTaskView"
+    static let hapticEngineView = "HapticEngineView"
 }
 
 struct ContentView: View {
@@ -23,7 +24,7 @@ struct ContentView: View {
         Item(title: Screen.tipKitView),
         Item(title: Screen.barChartsView),
         Item(title: Screen.backgroundTaskView),
-        Item(title: "Four"),
+        Item(title: Screen.hapticEngineView),
         Item(title: "Five"),
         Item(title: "Six"),
         Item(title: "Seven"),
@@ -54,6 +55,8 @@ struct ContentView: View {
             BarChartsView()
         case Screen.backgroundTaskView:
             BackgroundTaskView()
+        case Screen.hapticEngineView:
+            HapticEngineView()
         default:
             Text("Not implemented yet")
         }
