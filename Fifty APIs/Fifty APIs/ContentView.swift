@@ -14,12 +14,13 @@ struct Item: Identifiable {
 
 enum Screen {
     static let tipKitView = "TipKitView"
+    static let barChartsView = "BarChartsView"
 }
 
 struct ContentView: View {
     let allItems = [
         Item(title: Screen.tipKitView),
-        Item(title: "Two"),
+        Item(title: Screen.barChartsView),
         Item(title: "Three"),
         Item(title: "Four"),
         Item(title: "Five"),
@@ -48,6 +49,8 @@ struct ContentView: View {
         switch item.title {
         case Screen.tipKitView:
             TipKitView()
+        case Screen.barChartsView:
+            BarChartsView()
         default:
             Text("Not implemented yet")
         }
