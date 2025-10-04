@@ -12,9 +12,13 @@ struct Item: Identifiable {
     let title: String
 }
 
+enum Screen {
+    static let tipKitView = "TipKitView"
+}
+
 struct ContentView: View {
     let allItems = [
-        Item(title: "TipKitView"),
+        Item(title: Screen.tipKitView),
         Item(title: "Two"),
         Item(title: "Three"),
         Item(title: "Four"),
@@ -30,7 +34,7 @@ struct ContentView: View {
             List {
                 ForEach(allItems.indices, id: \.self) { index in
                     let item = allItems[index]
-                    NavigationLink("\(index) - \(item.title)") {
+                    NavigationLink("\(index + 1) - \(item.title)") {
                         destination(for: item)
                     }
                 }
@@ -42,7 +46,7 @@ struct ContentView: View {
     @ViewBuilder
     private func destination(for item: Item) -> some View {
         switch item.title {
-        case "TipKitView":
+        case Screen.tipKitView:
             TipKitView()
         default:
             Text("Not implemented yet")

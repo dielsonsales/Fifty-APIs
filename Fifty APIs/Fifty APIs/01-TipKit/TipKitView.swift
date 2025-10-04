@@ -27,7 +27,7 @@ struct TipKitView: View {
             Image(systemName: "star")
                 .popoverTip(myTip)
         }
-        .navigationTitle("TipKitView")
+        .navigationTitle(Screen.tipKitView)
         .task {
             do {
                 try Tips.configure()
