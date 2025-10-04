@@ -24,10 +24,10 @@ struct TipKitView: View {
     let myTip = MyTip()
     var body: some View {
         VStack {
-            TipView(myTip, arrowEdge: .bottom)
             Image(systemName: "star")
                 .popoverTip(myTip)
         }
+        .navigationTitle("TipKitView")
         .task {
             do {
                 try Tips.configure()

@@ -14,7 +14,7 @@ struct Item: Identifiable {
 
 struct ContentView: View {
     let allItems = [
-        Item(title: "One"),
+        Item(title: "TipKitView"),
         Item(title: "Two"),
         Item(title: "Three"),
         Item(title: "Four"),
@@ -26,12 +26,25 @@ struct ContentView: View {
         Item(title: "Ten")
     ]
     var body: some View {
-        VStack {
+        NavigationStack {
             List {
                 ForEach(allItems) { item in
-                    Text(item.title)
+                    NavigationLink(item.title) {
+                        destination(for: item)
+                    }
                 }
             }
+            .navigationTitle("All Items")
+        }
+    }
+
+    @ViewBuilder
+    private func destination(for item: Item) -> some View {
+        switch item.title {
+        case "TipKitView":
+            TipKitView()
+        default:
+            Text("Not implemented yet")
         }
     }
 }
