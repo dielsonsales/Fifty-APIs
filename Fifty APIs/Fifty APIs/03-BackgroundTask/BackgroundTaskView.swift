@@ -12,12 +12,12 @@ struct BackgroundTaskView: View {
     var body: some View {
         Button("Start background task") {
             Task {
-//                guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-//                    print("Couldn't find AppDelegate")
-//                    return
-//                }
-                AppDelegate.instance.scheduleContinuedProcessingTask()
-//                appDelegate.scheduleContinuedProcessingTask()
+                if #available(iOS 26.0, *) {
+                    AppDelegate.instance.scheduleContinuedProcessingTask()
+                } else {
+                    // Fallback on earlier versions
+                    print("ContinuedBackgroundTask not available before iOS 26")
+                }
             }
         }
     }

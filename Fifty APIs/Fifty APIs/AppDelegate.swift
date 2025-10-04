@@ -22,21 +22,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
     ) -> Bool {
         AppDelegate.instance = self
-        BGTaskScheduler.shared.register(
-            forTaskWithIdentifier: Constants.taskIdentifier,
-            using: nil
-        ) { task in
-            guard let task = task as? BGContinuedProcessingTask else {
-                return
+        if #available(iOS 26.0, *) {
+            BGTaskScheduler.shared.register(
+                forTaskWithIdentifier: Constants.taskIdentifier,
+                using: nil
+            ) { task in
+                guard let task = task as? BGContinuedProcessingTask else {
+                    return
+                }
+                print("Calling handleContinuedProcessing")
+                self.handleContinuedProcessing(task: task)
             }
-            print("Calling handleContinuedProcessing")
-            self.handleContinuedProcessing(task: task)
+        } else {
+            // Fallback on earlier versions
         }
         return true
     }
 
     // MARK: - Public API
 
+    @available(iOS 26.0, *)
     func scheduleContinuedProcessingTask() {
         print("Scheduling continued processing task...")
         let request = BGContinuedProcessingTaskRequest(
@@ -54,6 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: - Private methods
 
+    @available(iOS 26.0, *)
     private func handleContinuedProcessing(task: BGContinuedProcessingTask) {
         var shouldContinue = true
         task.expirationHandler = {
