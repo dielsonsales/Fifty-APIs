@@ -55,22 +55,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Private methods
 
     private func handleContinuedProcessing(task: BGContinuedProcessingTask) {
+        var shouldContinue = true
         task.expirationHandler = {
+            shouldContinue = false
             print("Task expired!")
         }
-        DispatchQueue.global().async {
-            print("Running doSomeWork from a background thread...")
-            self.doSomeWork()
-            task.setTaskCompleted(success: true)
-        }
-    }
 
-    private func doSomeWork() {
+        task.progress.totalUnitCount = 10
+        task.progress.completedUnitCount = 0
+
         for i in 1...10 {
+            if !shouldContinue {
+                break
+            }
             print("Background work \(i)...")
             Thread.sleep(forTimeInterval: 2)
         }
+        task.setTaskCompleted(success: shouldContinue)
     }
-
-
 }
