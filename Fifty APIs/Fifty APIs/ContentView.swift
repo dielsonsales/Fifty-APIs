@@ -28,8 +28,9 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             List {
-                ForEach(allItems) { item in
-                    NavigationLink(item.title) {
+                ForEach(allItems.indices, id: \.self) { index in
+                    let item = allItems[index]
+                    NavigationLink("\(index) - \(item.title)") {
                         destination(for: item)
                     }
                 }
